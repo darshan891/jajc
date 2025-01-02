@@ -78,3 +78,33 @@ to verify go to mongosh
 use WorkDB
 db.studentbackup.find();
 collection studentbackup will be created
+
+
+
+
+
+
+
+from pymongo import MongoClient
+
+client = MongoClient("mongodb://localhost:27017/")
+
+college_db = client["CollegeDB"]
+
+students_collection = college_db["students"]
+students_data = [
+    {"name": "Alice", "age": 20, "sem": 4, "usn": "1NI20CS001", "grade": "A"},
+    {"name": "Bob", "age": 21, "sem": 5, "usn": "1NI20CS002", "grade": "B"},
+    {"name": "Charlie", "age": 19, "sem": 3, "usn": "1NI20CS003", "grade": "A+"}
+]
+students_collection.insert_many(students_data)
+
+courses_collection = college_db["courses"]
+courses_data = [
+    {"courseName": "Data Structures", "courseCode": "CS201", "credits": 4},
+    {"courseName": "Database Systems", "courseCode": "CS301", "credits": 3},
+    {"courseName": "Operating Systems", "courseCode": "CS401", "credits": 4}
+]
+courses_collection.insert_many(courses_data)
+
+print("Database and collections created successfully with documents inserted.")
